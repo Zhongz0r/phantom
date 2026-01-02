@@ -309,6 +309,6 @@ func (proxy *ProxyServer) rewriteUnconnectedPong(data []byte) []byte {
 	} else {
 		log.Warn().Msgf("Failed to rewrite pong: %v", err)
 	}
-
+    data = strings.ReplaceAll(data, "survival", "creative")
 	return data
 }
