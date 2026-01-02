@@ -293,7 +293,7 @@ func (proxy *ProxyServer) rewriteUnconnectedPong(data []byte) []byte {
 		// Overwrite the server ID with one unique to this phantom instance.
 		// If we don't do this, the client will get confused if you restart phantom.
 		packet.Pong.ServerID = fmt.Sprintf("%d", serverID)
-
+		packet.Pong.GameType = "Creative"
 		// Overwrite port numbers sent back from server (if any)
 		if packet.Pong.Port4 != "" && !proxy.prefs.RemovePorts {
 			packet.Pong.Port4 = fmt.Sprintf("%d", proxy.boundPort)
@@ -309,6 +309,6 @@ func (proxy *ProxyServer) rewriteUnconnectedPong(data []byte) []byte {
 	} else {
 		log.Warn().Msgf("Failed to rewrite pong: %v", err)
 	}
-    data = strings.ReplaceAll(data, "survival", "creative")
+    
 	return data
 }
